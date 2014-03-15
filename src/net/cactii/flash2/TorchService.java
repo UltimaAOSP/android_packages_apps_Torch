@@ -29,6 +29,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class TorchService extends Service {
     private static final String MSG_TAG = "TorchRoot";
@@ -102,15 +104,16 @@ public class TorchService extends Service {
         PendingIntent turnOffIntent = PendingIntent.getBroadcast(this, 0,
                 new Intent(TorchSwitch.TOGGLE_FLASHLIGHT), 0);
 
+	Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_appwidget_torch_on);
         Notification notification = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.notification_icon)
+		.setLargeIcon(b)
                 .setTicker(getString(R.string.not_torch_title))
                 .setContentTitle(getString(R.string.not_torch_title))
-                .setContentIntent(contentIntent)
+		.setContentText(getString(R.string.not_torch_toggle))
+                .setContentIntent(turnOffIntent)
                 .setAutoCancel(false)
                 .setOngoing(true)
-                .addAction(R.drawable.ic_appwidget_torch_off,
-                    getString(R.string.not_torch_toggle), turnOffIntent)
                 .build();
 
         startForeground(getString(R.string.app_name).hashCode(), notification);
