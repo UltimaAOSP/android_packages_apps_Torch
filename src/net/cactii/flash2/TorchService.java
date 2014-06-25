@@ -85,7 +85,6 @@ public class TorchService extends Service {
                 0, new Intent(this, MainActivity.class), 0);
         PendingIntent turnOffIntent = PendingIntent.getBroadcast(this, 0,
                 new Intent(TorchSwitch.TOGGLE_FLASHLIGHT), 0);
-<<<<<<< HEAD
 
 	Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_appwidget_torch_on);
         Notification notification = new Notification.Builder(this)
